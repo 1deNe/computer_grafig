@@ -1,0 +1,11 @@
+{
+	"InstallScripts" : 
+	[
+		"/mnt/c/Users/Asus/Desktop/\u0410\u0440\u0445\u0438\u0432/build/cmake_install.cmake",
+		"/mnt/c/Users/Asus/Desktop/\u0410\u0440\u0445\u0438\u0432/build/_deps/glfw-build/cmake_install.cmake",
+		"/mnt/c/Users/Asus/Desktop/\u0410\u0440\u0445\u0438\u0432/build/_deps/glfw-build/src/cmake_install.cmake",
+		"/mnt/c/Users/Asus/Desktop/\u0410\u0440\u0445\u0438\u0432/build/_deps/glm-build/cmake_install.cmake",
+		"/mnt/c/Users/Asus/Desktop/\u0410\u0440\u0445\u0438\u0432/build/_deps/glm-build/glm/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

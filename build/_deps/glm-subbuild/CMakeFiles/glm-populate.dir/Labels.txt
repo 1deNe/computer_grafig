@@ -1,0 +1,14 @@
+# Target labels
+ glm-populate
+# Source files and their labels
+/mnt/c/Users/Asus/Desktop/Архив/build/_deps/glm-subbuild/CMakeFiles/glm-populate
+/mnt/c/Users/Asus/Desktop/Архив/build/_deps/glm-subbuild/CMakeFiles/glm-populate.rule
+/mnt/c/Users/Asus/Desktop/Архив/build/_deps/glm-subbuild/CMakeFiles/glm-populate-complete.rule
+/mnt/c/Users/Asus/Desktop/Архив/build/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-build.rule
+/mnt/c/Users/Asus/Desktop/Архив/build/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-configure.rule
+/mnt/c/Users/Asus/Desktop/Архив/build/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-download.rule
+/mnt/c/Users/Asus/Desktop/Архив/build/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-install.rule
+/mnt/c/Users/Asus/Desktop/Архив/build/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-mkdir.rule
+/mnt/c/Users/Asus/Desktop/Архив/build/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-patch.rule
+/mnt/c/Users/Asus/Desktop/Архив/build/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-test.rule
+/mnt/c/Users/Asus/Desktop/Архив/build/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-update.rule

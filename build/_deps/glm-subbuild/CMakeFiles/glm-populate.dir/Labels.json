@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/mnt/c/Users/Asus/Desktop/\u0410\u0440\u0445\u0438\u0432/build/_deps/glm-subbuild/CMakeFiles/glm-populate"
+		},
+		{
+			"file" : "/mnt/c/Users/Asus/Desktop/\u0410\u0440\u0445\u0438\u0432/build/_deps/glm-subbuild/CMakeFiles/glm-populate.rule"
+		},
+		{
+			"file" : "/mnt/c/Users/Asus/Desktop/\u0410\u0440\u0445\u0438\u0432/build/_deps/glm-subbuild/CMakeFiles/glm-populate-complete.rule"
+		},
+		{
+			"file" : "/mnt/c/Users/Asus/Desktop/\u0410\u0440\u0445\u0438\u0432/build/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-build.rule"
+		},
+		{
+			"file" : "/mnt/c/Users/Asus/Desktop/\u0410\u0440\u0445\u0438\u0432/build/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-configure.rule"
+		},
+		{
+			"file" : "/mnt/c/Users/Asus/Desktop/\u0410\u0440\u0445\u0438\u0432/build/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-download.rule"
+		},
+		{
+			"file" : "/mnt/c/Users/Asus/Desktop/\u0410\u0440\u0445\u0438\u0432/build/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-install.rule"
+		},
+		{
+			"file" : "/mnt/c/Users/Asus/Desktop/\u0410\u0440\u0445\u0438\u0432/build/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-mkdir.rule"
+		},
+		{
+			"file" : "/mnt/c/Users/Asus/Desktop/\u0410\u0440\u0445\u0438\u0432/build/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-patch.rule"
+		},
+		{
+			"file" : "/mnt/c/Users/Asus/Desktop/\u0410\u0440\u0445\u0438\u0432/build/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-test.rule"
+		},
+		{
+			"file" : "/mnt/c/Users/Asus/Desktop/\u0410\u0440\u0445\u0438\u0432/build/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"glm-populate"
+		],
+		"name" : "glm-populate"
+	}
+}
