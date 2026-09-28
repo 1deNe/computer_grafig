@@ -1,5 +1,6 @@
-CMakeFiles/cg.dir/main.cpp.o: \
- /mnt/c/Users/Asus/Desktop/Архив/main.cpp /usr/include/stdc-predef.h \
+CMakeFiles/second.dir/second.cpp.o: \
+ /mnt/c/Users/Asus/Desktop/Архив/second.cpp \
+ /usr/include/stdc-predef.h \
  /mnt/c/Users/Asus/Desktop/Архив/external/glad/include/glad/gl.h \
  /mnt/c/Users/Asus/Desktop/Архив/external/glad/include/KHR/khrplatform.h \
  /usr/lib/gcc/x86_64-linux-gnu/15/include/stdint.h /usr/include/stdint.h \
@@ -189,4 +190,8 @@ CMakeFiles/cg.dir/main.cpp.o: \
  /usr/include/c++/15/bits/locale_facets.tcc \
  /usr/include/c++/15/bits/basic_ios.tcc \
  /usr/include/c++/15/bits/ostream.tcc /usr/include/c++/15/istream \
- /usr/include/c++/15/bits/istream.tcc
+ /usr/include/c++/15/bits/istream.tcc /usr/include/c++/15/vector \
+ /usr/include/c++/15/bits/stl_uninitialized.h \
+ /usr/include/c++/15/bits/stl_vector.h \
+ /usr/include/c++/15/bits/stl_bvector.h \
+ /usr/include/c++/15/bits/vector.tcc

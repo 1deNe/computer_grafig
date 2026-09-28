@@ -1,139 +1,126 @@
 // =====================================================================
 //  КОМПЬЮТЕРЛІК ГРАФИКА — бір файлдық жоба
-//  1-АПТА — терезе ашу және негізгі басқару
+//  2-АПТА — Үшбұрыш (VBO + VAO)
 // =====================================================================
 
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
-#include <string>
 #include <cmath>
 #include <iostream>
-#include <fstream>
-#include <sstream>
 
-// ---------------------------------------------------------------------
-//  Баптаулар
-// ---------------------------------------------------------------------
-const int WIDTH  = 1280;
+const int WIDTH = 1280;
 const int HEIGHT = 720;
 
-// ---------------------------------------------------------------------
-//  3. Пробел басылғанын сақтау үшін жаһандық айнымалы
-// ---------------------------------------------------------------------
 bool whiteBackground = false;
+bool changeColor = false;
+bool lineLoopMode = false;
 
 // ---------------------------------------------------------------------
-//  Шейдерді файлдан жүктеу класы
+// Vertex Shader
 // ---------------------------------------------------------------------
-class Shader {
-public:
+const char* vertexSrc = R"(
+#version 330 core
 
-    unsigned int ID;
+layout (location = 0) in vec3 aPos;
 
-    Shader(const char* vertexPath, const char* fragmentPath) {
-
-        std::string vertexCode;
-        std::string fragmentCode;
-
-        std::ifstream vertexFile(vertexPath);
-        std::ifstream fragmentFile(fragmentPath);
-
-        if (!vertexFile.is_open()) {
-            std::cerr << "Vertex shader файлы ашылмады: "
-                      << vertexPath << "\n";
-        }
-
-        if (!fragmentFile.is_open()) {
-            std::cerr << "Fragment shader файлы ашылмады: "
-                      << fragmentPath << "\n";
-        }
-
-        std::stringstream vertexStream;
-        std::stringstream fragmentStream;
-
-        vertexStream << vertexFile.rdbuf();
-        fragmentStream << fragmentFile.rdbuf();
-
-        vertexCode = vertexStream.str();
-        fragmentCode = fragmentStream.str();
-
-        const char* vertexSource = vertexCode.c_str();
-        const char* fragmentSource = fragmentCode.c_str();
-
-        // Vertex shader
-        unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
-
-        glShaderSource(
-            vertexShader,
-            1,
-            &vertexSource,
-            nullptr
-        );
-
-        glCompileShader(vertexShader);
-
-        // Fragment shader
-        unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-
-        glShaderSource(
-            fragmentShader,
-            1,
-            &fragmentSource,
-            nullptr
-        );
-
-        glCompileShader(fragmentShader);
-
-        // Shader program
-        ID = glCreateProgram();
-
-        glAttachShader(ID, vertexShader);
-        glAttachShader(ID, fragmentShader);
-
-        glLinkProgram(ID);
-
-        glDeleteShader(vertexShader);
-        glDeleteShader(fragmentShader);
-    }
-
-    void use() {
-        glUseProgram(ID);
-    }
-};
+void main()
+{
+    gl_Position = vec4(aPos, 1.0);
+}
+)";
 
 // ---------------------------------------------------------------------
-//  Терезе өлшемі өзгергенде шақырылады
+// Fragment Shader
 // ---------------------------------------------------------------------
-void onResize(GLFWwindow*, int width, int height) {
+const char* fragmentSrc = R"(
+#version 330 core
+
+out vec4 FragColor;
+
+uniform vec3 ourColor;
+
+void main()
+{
+    FragColor = vec4(ourColor, 1.0);
+}
+)";
+
+// ---------------------------------------------------------------------
+// Терезе өлшемі өзгергенде
+// ---------------------------------------------------------------------
+void onResize(GLFWwindow*, int width, int height)
+{
     glViewport(0, 0, width, height);
 }
 
 // ---------------------------------------------------------------------
-//  Пернетақтаны тексеру
+// Пернетақта
 // ---------------------------------------------------------------------
-void processInput(GLFWwindow* window) {
-
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+void processInput(GLFWwindow* window)
+{
+    // ESC — шығу
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+    {
         glfwSetWindowShouldClose(window, true);
     }
 
-    if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
+    // SPACE — ақ фон
+    if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+    {
         whiteBackground = true;
     }
-    else {
+    else
+    {
         whiteBackground = false;
+    }
+
+    // -------------------------------------------------------------
+    // 5 — түс өзгерту
+    // -------------------------------------------------------------
+    static bool key5WasPressed = false;
+
+    if (glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS)
+    {
+        if (!key5WasPressed)
+        {
+            changeColor = !changeColor;
+            key5WasPressed = true;
+        }
+    }
+    else
+    {
+        key5WasPressed = false;
+    }
+
+    // -------------------------------------------------------------
+    // 6 — GL_LINE_LOOP
+    // -------------------------------------------------------------
+    static bool key6WasPressed = false;
+
+    if (glfwGetKey(window, GLFW_KEY_6) == GLFW_PRESS)
+    {
+        if (!key6WasPressed)
+        {
+            lineLoopMode = !lineLoopMode;
+            key6WasPressed = true;
+        }
+    }
+    else
+    {
+        key6WasPressed = false;
     }
 }
 
 // =====================================================================
-//  MAIN
+// MAIN
 // =====================================================================
-int main() {
-
+int main()
+{
     // -----------------------------------------------------------------
-    //  1. GLFW-ны іске қосу
+    // GLFW
     // -----------------------------------------------------------------
-    if (!glfwInit()) {
+    if (!glfwInit())
+    {
         std::cerr << "GLFW іске қосылмады\n";
         return -1;
     }
@@ -147,20 +134,19 @@ int main() {
 #endif
 
     // -----------------------------------------------------------------
-    //  2. Терезе жасау
+    // Терезе
     // -----------------------------------------------------------------
     GLFWwindow* window = glfwCreateWindow(
         WIDTH,
         HEIGHT,
-        "Компьютерлік графика",
+        "Компьютерлік графика — 2 апта",
         nullptr,
         nullptr
     );
 
-    if (!window) {
-        std::cerr << "Терезе жасалмады. Видеокарта OpenGL 3.3-ті "
-                     "қолдамауы мүмкін.\n";
-
+    if (!window)
+    {
+        std::cerr << "Терезе жасалмады\n";
         glfwTerminate();
         return -1;
     }
@@ -170,50 +156,72 @@ int main() {
     glfwSetFramebufferSizeCallback(window, onResize);
 
     // -----------------------------------------------------------------
-    //  4. VSync өшіру
+    // GLAD
     // -----------------------------------------------------------------
-    glfwSwapInterval(0);
-
-    // -----------------------------------------------------------------
-    //  3. GLAD
-    // -----------------------------------------------------------------
-    if (gladLoadGL(glfwGetProcAddress) == 0) {
-
+    if (gladLoadGL(glfwGetProcAddress) == 0)
+    {
         std::cerr << "GLAD жүктелмеді\n";
-
         glfwTerminate();
         return -1;
     }
 
-    std::cout << "OpenGL: " << glGetString(GL_VERSION) << "\n";
-    std::cout << "GPU:    " << glGetString(GL_RENDERER) << "\n";
+    std::cout << "OpenGL: "
+              << glGetString(GL_VERSION)
+              << "\n";
+
+    std::cout << "GPU: "
+              << glGetString(GL_RENDERER)
+              << "\n";
 
     // -----------------------------------------------------------------
-    //  FPS есептеу үшін айнымалылар
+    // VSync өшіру
+    // -----------------------------------------------------------------
+    glfwSwapInterval(0);
+
+    // -----------------------------------------------------------------
+    // FPS
     // -----------------------------------------------------------------
     double fpsTimer = glfwGetTime();
     int frameCount = 0;
 
-    // === 2-АПТА: үшбұрыштың деректері мен буферлері ===
+    // =================================================================
+    // 2-АПТА — VBO + VAO
+    // =================================================================
 
-    // Позиция + түс
-    float vertices[] = {
+    // -----------------------------------------------------------------
+    // 2 үшбұрыш
+    // Барлығы 6 vertex
+    // -----------------------------------------------------------------
+    float vertices[] =
+    {
+        // 1-ші үшбұрыш — жоғары қарап тұр
+         0.0f,  0.7f, 0.0f,
+        -0.6f, -0.35f, 0.0f,
+         0.6f, -0.35f, 0.0f,
 
-        // x      y       r    g    b
-         0.0f,   0.5f,   1.0f, 0.0f, 0.0f,   // Жоғарғы - қызыл
-        -0.5f,  -0.5f,   0.0f, 1.0f, 0.0f,   // Сол жақ - жасыл
-         0.5f,  -0.5f,   0.0f, 0.0f, 1.0f    // Оң жақ - көк
+        // 2-ші үшбұрыш — төмен қарап тұр
+         0.0f, -0.7f, 0.0f,
+        -0.6f,  0.35f, 0.0f,
+         0.6f,  0.35f, 0.0f
     };
+    
 
-    unsigned int VBO, VAO;
+    // -----------------------------------------------------------------
+    // VAO және VBO
+    // -----------------------------------------------------------------
+    unsigned int vao;
+    unsigned int vbo;
 
-    glGenVertexArrays(1, &VAO);
-    glGenBuffers(1, &VBO);
+    glGenVertexArrays(1, &vao);
+    glGenBuffers(1, &vbo);
 
-    glBindVertexArray(VAO);
+    // VAO
+    glBindVertexArray(vao);
 
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    // VBO
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
+    // Деректерді GPU-ға жіберу
     glBufferData(
         GL_ARRAY_BUFFER,
         sizeof(vertices),
@@ -222,55 +230,83 @@ int main() {
     );
 
     // -----------------------------------------------------------------
-    //  Позиция атрибуты
+    // Vertex атрибуты
     // -----------------------------------------------------------------
-
     glVertexAttribPointer(
         0,
-        2,
+        3,
         GL_FLOAT,
         GL_FALSE,
-        5 * sizeof(float),
+        3 * sizeof(float),
         (void*)0
     );
 
     glEnableVertexAttribArray(0);
 
-    // -----------------------------------------------------------------
-    //  Түс атрибуты
-    // -----------------------------------------------------------------
-
-    glVertexAttribPointer(
-        1,
-        3,
-        GL_FLOAT,
-        GL_FALSE,
-        5 * sizeof(float),
-        (void*)(2 * sizeof(float))
-    );
-
-    glEnableVertexAttribArray(1);
-
     glBindVertexArray(0);
 
-    // === 3-АПТА: шейдерді файлдан жүктеу ===
+    // =================================================================
+    // Vertex Shader компиляциясы
+    // =================================================================
 
-    Shader shader(
-        "vertex.glsl",
-        "fragment.glsl"
+    unsigned int vs = glCreateShader(GL_VERTEX_SHADER);
+
+    glShaderSource(
+        vs,
+        1,
+        &vertexSrc,
+        nullptr
     );
 
-    // -----------------------------------------------------------------
-    //  4. Негізгі цикл
-    // -----------------------------------------------------------------
-    while (!glfwWindowShouldClose(window)) {
+    glCompileShader(vs);
 
-        // Пернетақтаны тексеру
+    // =================================================================
+    // Fragment Shader компиляциясы
+    // =================================================================
+
+    unsigned int fs = glCreateShader(GL_FRAGMENT_SHADER);
+
+    glShaderSource(
+        fs,
+        1,
+        &fragmentSrc,
+        nullptr
+    );
+
+    glCompileShader(fs);
+
+    // =================================================================
+    // Shader Program
+    // =================================================================
+
+    unsigned int shader = glCreateProgram();
+
+    glAttachShader(shader, vs);
+    glAttachShader(shader, fs);
+
+    glLinkProgram(shader);
+
+    glDeleteShader(vs);
+    glDeleteShader(fs);
+
+    // -----------------------------------------------------------------
+    // Color uniform location
+    // -----------------------------------------------------------------
+    int colorLocation =
+        glGetUniformLocation(shader, "ourColor");
+
+    // =================================================================
+    // Негізгі цикл
+    // =================================================================
+
+    while (!glfwWindowShouldClose(window))
+    {
         processInput(window);
 
-        // -------------------------------------------------------------
-        //  Фон түсін есептеу
-        // -------------------------------------------------------------
+        // -----------------------------------------------------------------
+        // Фон
+        // -----------------------------------------------------------------
+
         float t = (float)glfwGetTime();
 
         float r =
@@ -281,10 +317,8 @@ int main() {
             (std::sin(t * 1.5f) + 1.0f)
             * 0.5f * 0.3f;
 
-        // -------------------------------------------------------------
-        //  Пробел басылса — ақ фон
-        // -------------------------------------------------------------
-        if (whiteBackground) {
+        if (whiteBackground)
+        {
             glClearColor(
                 1.0f,
                 1.0f,
@@ -292,7 +326,8 @@ int main() {
                 1.0f
             );
         }
-        else {
+        else
+        {
             glClearColor(
                 r,
                 g,
@@ -301,32 +336,85 @@ int main() {
             );
         }
 
-        // Экранды тазалау
         glClear(GL_COLOR_BUFFER_BIT);
 
-        // -------------------------------------------------------------
-        //  Үшбұрышты салу
-        // -------------------------------------------------------------
+        // -----------------------------------------------------------------
+        // Shader
+        // -----------------------------------------------------------------
 
-        shader.use();
+        glUseProgram(shader);
 
-        glBindVertexArray(VAO);
+        // -----------------------------------------------------------------
+        // 5 — түс өзгерту
+        // -----------------------------------------------------------------
 
-        glDrawArrays(
-            GL_TRIANGLES,
-            0,
-            3
-        );
+        if (changeColor)
+        {
+            // Қызыл
+            glUniform3f(
+                colorLocation,
+                1.0f,
+                0.2f,
+                0.2f
+            );
+        }
+        else
+        {
+            // Көгілдір
+            glUniform3f(
+                colorLocation,
+                0.2f,
+                0.8f,
+                1.0f
+            );
+        }
 
-        // -------------------------------------------------------------
-        //  FPS есептеу
-        // -------------------------------------------------------------
+        // -----------------------------------------------------------------
+        // VAO
+        // -----------------------------------------------------------------
+
+        glBindVertexArray(vao);
+
+        // -----------------------------------------------------------------
+        // 6 — GL_LINE_LOOP
+        // -----------------------------------------------------------------
+
+        if (lineLoopMode)
+        {
+            // Бірінші үшбұрыш
+            glDrawArrays(
+                GL_LINE_LOOP,
+                0,
+                3
+            );
+
+            // Екінші үшбұрыш
+            glDrawArrays(
+                GL_LINE_LOOP,
+                3,
+                3
+            );
+        }
+        else
+        {
+            // Қалыпты режим
+            glDrawArrays(
+                GL_TRIANGLES,
+                0,
+                6
+            );
+        }
+
+        // -----------------------------------------------------------------
+        // FPS
+        // -----------------------------------------------------------------
+
         frameCount++;
 
         double currentTime = glfwGetTime();
 
-        if (currentTime - fpsTimer >= 1.0) {
-
+        if (currentTime - fpsTimer >= 1.0)
+        {
             std::cout
                 << "FPS: "
                 << frameCount
@@ -336,18 +424,21 @@ int main() {
             fpsTimer = currentTime;
         }
 
+        // -----------------------------------------------------------------
+        // Экран
+        // -----------------------------------------------------------------
+
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
 
-    // -----------------------------------------------------------------
-    //  5. Тазалау
-    // -----------------------------------------------------------------
+    // =================================================================
+    // Тазалау
+    // =================================================================
 
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
-
-    glDeleteProgram(shader.ID);
+    glDeleteVertexArrays(1, &vao);
+    glDeleteBuffers(1, &vbo);
+    glDeleteProgram(shader);
 
     glfwTerminate();
 

@@ -130,6 +130,19 @@ cg/fast:
 .PHONY : cg/fast
 
 #=============================================================================
+# Target rules for targets named second
+
+# Build rule for target.
+second: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 second
+.PHONY : second
+
+# fast build rule for target.
+second/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/second.dir/build.make CMakeFiles/second.dir/build
+.PHONY : second/fast
+
+#=============================================================================
 # Target rules for targets named glfw
 
 # Build rule for target.
@@ -174,6 +187,7 @@ external/glad/src/gl.o: external/glad/src/gl.c.o
 # target to build an object file
 external/glad/src/gl.c.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/cg.dir/build.make CMakeFiles/cg.dir/external/glad/src/gl.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/second.dir/build.make CMakeFiles/second.dir/external/glad/src/gl.c.o
 .PHONY : external/glad/src/gl.c.o
 
 external/glad/src/gl.i: external/glad/src/gl.c.i
@@ -182,6 +196,7 @@ external/glad/src/gl.i: external/glad/src/gl.c.i
 # target to preprocess a source file
 external/glad/src/gl.c.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/cg.dir/build.make CMakeFiles/cg.dir/external/glad/src/gl.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/second.dir/build.make CMakeFiles/second.dir/external/glad/src/gl.c.i
 .PHONY : external/glad/src/gl.c.i
 
 external/glad/src/gl.s: external/glad/src/gl.c.s
@@ -190,6 +205,7 @@ external/glad/src/gl.s: external/glad/src/gl.c.s
 # target to generate assembly for a file
 external/glad/src/gl.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/cg.dir/build.make CMakeFiles/cg.dir/external/glad/src/gl.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/second.dir/build.make CMakeFiles/second.dir/external/glad/src/gl.c.s
 .PHONY : external/glad/src/gl.c.s
 
 main.o: main.cpp.o
@@ -216,6 +232,30 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/cg.dir/build.make CMakeFiles/cg.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+second.o: second.cpp.o
+.PHONY : second.o
+
+# target to build an object file
+second.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/second.dir/build.make CMakeFiles/second.dir/second.cpp.o
+.PHONY : second.cpp.o
+
+second.i: second.cpp.i
+.PHONY : second.i
+
+# target to preprocess a source file
+second.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/second.dir/build.make CMakeFiles/second.dir/second.cpp.i
+.PHONY : second.cpp.i
+
+second.s: second.cpp.s
+.PHONY : second.s
+
+# target to generate assembly for a file
+second.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/second.dir/build.make CMakeFiles/second.dir/second.cpp.s
+.PHONY : second.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -228,12 +268,16 @@ help:
 	@echo "... cg"
 	@echo "... glfw"
 	@echo "... glm"
+	@echo "... second"
 	@echo "... external/glad/src/gl.o"
 	@echo "... external/glad/src/gl.i"
 	@echo "... external/glad/src/gl.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... second.o"
+	@echo "... second.i"
+	@echo "... second.s"
 .PHONY : help
 
 

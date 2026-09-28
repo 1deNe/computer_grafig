@@ -1,9 +1,9 @@
-bin/cg: \
+bin/second: \
   /usr/lib/gcc/x86_64-linux-gnu/15/../../../x86_64-linux-gnu/Scrt1.o \
   /usr/lib/gcc/x86_64-linux-gnu/15/../../../x86_64-linux-gnu/crti.o \
   /usr/lib/gcc/x86_64-linux-gnu/15/crtbeginS.o \
-  CMakeFiles/cg.dir/main.cpp.o \
-  CMakeFiles/cg.dir/external/glad/src/gl.c.o \
+  CMakeFiles/second.dir/second.cpp.o \
+  CMakeFiles/second.dir/external/glad/src/gl.c.o \
   _deps/glfw-build/src/libglfw3.a \
   _deps/glm-build/glm/libglm.a \
   /usr/lib/x86_64-linux-gnu/libGLX.so \
@@ -36,8 +36,7 @@ bin/cg: \
   /usr/lib/gcc/x86_64-linux-gnu/15/libgcc.a \
   /usr/lib/gcc/x86_64-linux-gnu/15/crtendS.o \
   /usr/lib/gcc/x86_64-linux-gnu/15/../../../x86_64-linux-gnu/crtn.o \
-  /lib64/ld-linux-x86-64.so.2 \
-  /usr/lib/gcc/x86_64-linux-gnu/15/../../../x86_64-linux-gnu/libgcc_s.so.1
+  /lib64/ld-linux-x86-64.so.2
 
 /usr/lib/gcc/x86_64-linux-gnu/15/../../../x86_64-linux-gnu/Scrt1.o:
 
@@ -45,9 +44,9 @@ bin/cg: \
 
 /usr/lib/gcc/x86_64-linux-gnu/15/crtbeginS.o:
 
-CMakeFiles/cg.dir/main.cpp.o:
+CMakeFiles/second.dir/second.cpp.o:
 
-CMakeFiles/cg.dir/external/glad/src/gl.c.o:
+CMakeFiles/second.dir/external/glad/src/gl.c.o:
 
 _deps/glfw-build/src/libglfw3.a:
 
@@ -114,5 +113,3 @@ _deps/glm-build/glm/libglm.a:
 /usr/lib/gcc/x86_64-linux-gnu/15/../../../x86_64-linux-gnu/crtn.o:
 
 /lib64/ld-linux-x86-64.so.2:
-
-/usr/lib/gcc/x86_64-linux-gnu/15/../../../x86_64-linux-gnu/libgcc_s.so.1:

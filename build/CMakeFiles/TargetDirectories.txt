@@ -1,4 +1,5 @@
 /mnt/c/Users/Asus/Desktop/Архив/build/CMakeFiles/cg.dir
+/mnt/c/Users/Asus/Desktop/Архив/build/CMakeFiles/second.dir
 /mnt/c/Users/Asus/Desktop/Архив/build/CMakeFiles/edit_cache.dir
 /mnt/c/Users/Asus/Desktop/Архив/build/CMakeFiles/rebuild_cache.dir
 /mnt/c/Users/Asus/Desktop/Архив/build/_deps/glfw-build/CMakeFiles/edit_cache.dir

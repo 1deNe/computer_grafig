@@ -1,0 +1,1 @@
+/usr/bin/c++ -Wl,--dependency-file=CMakeFiles/second.dir/link.d CMakeFiles/second.dir/second.cpp.o CMakeFiles/second.dir/external/glad/src/gl.c.o -o bin/second  _deps/glfw-build/src/libglfw3.a _deps/glm-build/glm/libglm.a /usr/lib/x86_64-linux-gnu/libGLX.so /usr/lib/x86_64-linux-gnu/libOpenGL.so /usr/lib/x86_64-linux-gnu/librt.a -lm -ldl

@@ -42,3 +42,29 @@ target_link_libraries(cg PRIVATE OpenGL::GL glfw glm::glm)
 target_compile_definitions(cg PRIVATE
     ASSET_DIR="${CMAKE_CURRENT_SOURCE_DIR}/assets"
 )
+
+
+
+# ==========================================
+# 2-БАҒДАРЛАМА — second.cpp
+# ==========================================
+
+add_executable(second
+    second.cpp
+    external/glad/src/gl.c
+)
+
+target_include_directories(second PRIVATE
+    external/glad/include
+    external/stb
+)
+
+target_link_libraries(second PRIVATE
+    OpenGL::GL
+    glfw
+    glm::glm
+)
+
+target_compile_definitions(second PRIVATE
+    ASSET_DIR="${CMAKE_CURRENT_SOURCE_DIR}/assets"
+)
