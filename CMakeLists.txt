@@ -27,7 +27,7 @@ find_package(OpenGL REQUIRED)
 
 # --- Бүкіл бағдарлама: бір ғана файл ---
 add_executable(cg
-    main.cpp
+    1-2-week.cpp
     external/glad/src/gl.c
 )
 
@@ -46,11 +46,11 @@ target_compile_definitions(cg PRIVATE
 
 
 # ==========================================
-# 2-БАҒДАРЛАМА — second.cpp
+# 2-БАҒДАРЛАМА — peramida.cpp
 # ==========================================
 
 add_executable(second
-    second.cpp
+    peramida.cpp
     external/glad/src/gl.c
 )
 
@@ -68,3 +68,18 @@ target_link_libraries(second PRIVATE
 target_compile_definitions(second PRIVATE
     ASSET_DIR="${CMAKE_CURRENT_SOURCE_DIR}/assets"
 )
+
+# 3-апта — шейдерлер және түс интерполяциясы
+add_executable(week03 3-week.cpp external/glad/src/gl.c)
+target_include_directories(week03 PRIVATE external/glad/include)
+target_link_libraries(week03 PRIVATE OpenGL::GL glfw)
+
+# 4-апта — uniform, уақыт және delta time
+add_executable(week04 4-week.cpp external/glad/src/gl.c)
+target_include_directories(week04 PRIVATE external/glad/include)
+target_link_libraries(week04 PRIVATE OpenGL::GL glfw)
+
+# 5-апта — индекс буфері
+add_executable(week05 5-week.cpp external/glad/src/gl.c)
+target_include_directories(week05 PRIVATE external/glad/include)
+target_link_libraries(week05 PRIVATE OpenGL::GL glfw)
