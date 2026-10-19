@@ -4,17 +4,17 @@
 градиентті төртбұрыш, VAO/VBO/EBO, шейдер қатесін тексеру, фон және FPS
 сақталды. Vertex шейдердегі бұрынғы екі түрлендіру uniform-ының орнына
 бір `uniform mat4 uTransform` қолданылады. GLM 1.0.1 CMake-ке қосылған.
-Бұл папка GLAD үшін ата-аналық `Архив/external/glad` папкасын пайдаланады.
+Код басқа апталар сияқты `Архив` түбірінде, ортақ `CMakeLists.txt` арқылы
+құрастырылады. `build-week06` тек құрастыру нәтижелеріне арналған.
 
 ## WSL / Ubuntu арқылы іске қосу
 
-GRAFIKA папкасында:
+Архив папкасында:
 
 ```bash
-cd Архив/build-week06
-cmake --fresh -S . -B build
-cmake --build build --target week06 -j
-./build/bin/week06
+cmake --fresh -S . -B build-week06
+cmake --build build-week06 --target week06 -j
+./build-week06/bin/week06
 ```
 
 Алғашқы CMake баптауы GLFW/GLM жүктеу үшін интернетті қажет етеді.

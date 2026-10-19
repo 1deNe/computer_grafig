@@ -83,3 +83,8 @@ target_link_libraries(week04 PRIVATE OpenGL::GL glfw)
 add_executable(week05 5-week.cpp external/glad/src/gl.c)
 target_include_directories(week05 PRIVATE external/glad/include)
 target_link_libraries(week05 PRIVATE OpenGL::GL glfw)
+
+# 6-апта — түрлендіру матрицалары
+add_executable(week06 6-week.cpp external/glad/src/gl.c)
+target_include_directories(week06 PRIVATE external/glad/include)
+target_link_libraries(week06 PRIVATE OpenGL::GL glfw glm::glm)
